@@ -186,10 +186,32 @@ function initialize() {
             loadWelcomeOverlay();
         }
     });
+
+    // Function to set the hasSeenWelcomeOverlay value
+    function setHasSeenWelcomeOverlay() {
+        chrome.storage.sync.set({ hasSeenWelcomeOverlay: true }, () => {
+            // Do something after the value is set
+        });
+    }
+
+    // Listen for the custom event
+    document.addEventListener('setHasSeenWelcomeOverlay', () => {
+        // Set the value in chrome.storage
+        chrome.storage.sync.set({ hasSeenWelcomeOverlay: true }, () => {
+            // Do something after the value is set
+        });
+    });
 }
 
 // Add an event listener to initialize the script after the page fully loads
 window.addEventListener('load', function () {
     console.log("Page fully loaded. Initializing Disqus comments.");
     setTimeout(initialize, 1000);
+});
+
+// Listen for messages from the welcome overlay
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.action === 'hideWelcomeOverlay') {
+        setHasSeenWelcomeOverlay();
+    }
 });

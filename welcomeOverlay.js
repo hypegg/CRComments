@@ -125,8 +125,11 @@ function displayWelcomeOverlay() {
 
     // Add event listener to the button
     overlayButton.addEventListener('click', () => {
+        // Dispatch a custom event to the content script
+        const event = new CustomEvent('setHasSeenWelcomeOverlay');
+        document.dispatchEvent(event);
         overlayContainer.remove();
-        chrome.storage.sync.set({ hasSeenWelcomeOverlay: true });
+
     });
 
     // Add the overlay content to the overlay container
