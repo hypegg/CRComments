@@ -1,0 +1,31 @@
+/* Style for the Disqus comment section */
+#disqus_thread {
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Style for the loading spinner */
+#loadingSpinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+/* Spinner image style */
+#loadingSpinner img {
+    width: 40px; /* Set the width of the spinner */
+    height: 40px; /* Set the height of the spinner */
+    animation: spin 2s linear infinite; /* Add a spin animation */
+}
+
+/* Keyframes for the spin animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRComments Options</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', 'Helvetica Neue', helvetica, sans-serif;
+            background-color: #141519;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background: #23252b;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.375rem;
+            color: #ff640a;
+            margin-bottom: 20px;
+        }
+        .option {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #2f5161;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #213944;
+            color: #fff;
+        }
+        button {
+            background-color: #ff640a;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #ff7b2e;
+        }
+        .save-button {
+            margin-top: 20px;
+        }
+        .error-message {
+            color: #ff0000;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CRComments Options</h1>
+        <div class="option">
+            <label for="language">Language:</label>
+            <select id="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+                <option value="zh">Chinese</option>
+                <option value="ru">Russian</option>
+                <option value="pt">Portuguese</option>
+                <option value="pt_BR">Portuguese (Brazilian)</option>
+                <option value="it">Italian</option>
+                <option value="nl">Dutch</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="sort">Sort Order:</label>
+            <select id="sort">
+                <option value="best">Best</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+            </select>
+        </div>
+        <button id="save" class="save-button">Save Preferences</button>
+        <div id="error-message" class="error-message"></div>
+    </div>
+    <script src="options.js"></script>
+</body>
+</html>

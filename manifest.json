@@ -1,0 +1,54 @@
+{
+    "manifest_version": 3,
+    "name": "CRComments",
+    "version": "1.0.0",
+    "description": "Adds Disqus comments below the video player on Crunchyroll.",
+    "author": "Hypergg",
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://www.crunchyroll.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ]
+        }
+    ],
+    "storage": {
+        "schema": {
+            "hasSeenWelcomeOverlay": {
+                "type": "boolean",
+                "default": false
+            }
+        }
+    }
+    ,
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "disqusLoader.js",
+                "welcomeOverlay.js",
+                "images/spinner.png"
+            ],
+            "matches": [
+                "*://www.crunchyroll.com/*"
+            ]
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';"
+    },
+    "icons": {
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "options_page": "options.html"
+}
