@@ -98,8 +98,7 @@ function loadDisqusScript() {
             if (chrome.runtime.lastError) {
                 console.error("Error retrieving user preferences:", chrome.runtime.lastError);
             } else {
-                const userPreferences = result.userPreferences;
-                // Pass user preferences to the disqusLoader script
+                const userPreferences = result.userPreferences || { language: 'en', sort: 'newest' }; // Set default values
                 const disqusLoaderScript = document.querySelector('script[src*="disqusLoader.js"]');
                 disqusLoaderScript.dataset.userPreferences = JSON.stringify(userPreferences);
             }

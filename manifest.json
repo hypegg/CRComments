@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "CRComments",
-    "version": "1.0.0.1",
+    "version": "1.0.0.2",
     "description": "Adds Disqus comments below the video player on Crunchyroll.",
     "author": "Hypergg",
     "permissions": [
@@ -26,10 +26,16 @@
             "hasSeenWelcomeOverlay": {
                 "type": "boolean",
                 "default": false
+            },
+            "userPreferences": {
+                "type": "object",
+                "default": {
+                    "language": "en",
+                    "sort": "newest"
+                }
             }
         }
-    }
-    ,
+    },
     "web_accessible_resources": [
         {
             "resources": [
