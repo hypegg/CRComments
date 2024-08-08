@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRComments Options</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <style>
         body {
             font-family: 'Lato', 'Helvetica Neue', helvetica, sans-serif;
-            background-color: #141519;
-            color: #fff;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
+            background: linear-gradient(rgba(20, 21, 25, 0.8), rgba(20, 21, 25, 0.8)), url('images/background.webp') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(10px);
+            color: #FFFFFF;
+            overflow: hidden;
         }
+
         .container {
             background: #23252b;
             border-radius: 8px;
@@ -21,56 +30,166 @@
             padding: 20px;
             max-width: 400px;
             width: 100%;
+            text-align: center;
         }
+
         h1 {
-            font-size: 1.375rem;
-            color: #ff640a;
+            font-size: 1.5rem;
+            color: #F47521;
             margin-bottom: 20px;
         }
+
         .option {
             margin-bottom: 15px;
+            text-align: left;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
-            color: #fff;
+            color: #FFFFFF;
             font-size: 1rem;
             line-height: 1.5rem;
         }
-        select, button {
+
+        select,
+        button {
             width: 100%;
             padding: 10px;
-            border: 1px solid #2f5161;
+            border: 1px solid #979797;
             border-radius: 4px;
             font-size: 16px;
-            background-color: #213944;
-            color: #fff;
+            background-color: #141519;
+            color: #FFFFFF;
         }
+
         button {
-            background-color: #ff640a;
+            background-color: #F47521;
             font-weight: 600;
-            color: #fff;
             border: none;
             cursor: pointer;
             margin-top: 10px;
         }
+
         button:hover {
             background-color: #ff7b2e;
         }
+
         .save-button {
             margin-top: 20px;
         }
+
         .error-message {
             color: #ff0000;
             font-size: 0.875rem;
             margin-top: 5px;
         }
+
+        .toast {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            border-radius: 12px;
+            background: #23252B;
+            padding: 20px 35px 20px 25px;
+            box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transform: translateX(calc(100% + 30px));
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+        }
+
+        .toast.active {
+            transform: translateX(0%);
+        }
+
+        .toast .toast-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .toast-content .check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 35px;
+            min-width: 35px;
+            background-color: #51E8D9;
+            color: #333;
+            font-size: 20px;
+            border-radius: 50%;
+        }
+
+        .toast-content .message {
+            display: flex;
+            flex-direction: column;
+            margin: 0 20px;
+        }
+
+        .message .text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+            text-align: left;
+        }
+
+        .message .text.text-1 {
+            font-weight: 600;
+            color: #51E8D9;
+            text-align: left;
+        }
+
+        .toast .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            padding: 5px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .toast .close:hover {
+            opacity: 1;
+        }
+
+        .toast .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+        }
+
+        .toast .progress:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #51E8D9;
+        }
+
+        .progress.active:before {
+            animation: progress 5s linear forwards;
+        }
+
+        @keyframes progress {
+            100% {
+                left: 100%;
+            }
+        }
+
+        .logo {
+            width: 100px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>CRComments Options</h1>
+        <img src="images/icon128.png" alt="CRComments Logo" class="logo">
+        <h1>CRComments</h1>
         <div class="option">
             <label for="language">Language:</label>
             <select id="language">
@@ -98,7 +217,20 @@
         </div>
         <button id="save" class="save-button">Save Preferences</button>
         <div id="error-message" class="error-message"></div>
+        <!-- Toast notification -->
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <i class="fas fa-check check"></i>
+                <div class="message">
+                    <span class="text text-1">Success</span>
+                    <span class="text">Your changes have been saved</span>
+                </div>
+            </div>
+            <i class="fas fa-xmark close" id="close-icon"></i>
+            <div class="progress" id="progress"></div>
+        </div>
     </div>
     <script src="options.js"></script>
 </body>
+
 </html>
