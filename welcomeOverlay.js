@@ -62,9 +62,8 @@ const translations = {
     }
 };
 
-
 // Function to display the welcome overlay
-function displayWelcomeOverlay() {
+function displayWelcomeOverlay(iconURL) {
     // Get the user's language (e.g., 'en-US', 'es-ES', 'pt-BR', 'ru-RU')
     const userLang = navigator.language.split('-')[0]; // Extract the language code
 
@@ -99,7 +98,7 @@ function displayWelcomeOverlay() {
     overlayIcon.style.width = '50px';
     overlayIcon.style.height = '50px';
     overlayIcon.style.float = 'right';
-    overlayIcon.src = 'https://www.google.com/logos/fnbx/animal_paws/cat_kp_dm.gif';
+    overlayIcon.src = iconURL;
 
     // Create the overlay header
     const overlayHeader = document.createElement('h2');
@@ -129,7 +128,6 @@ function displayWelcomeOverlay() {
         const event = new CustomEvent('setHasSeenWelcomeOverlay');
         document.dispatchEvent(event);
         overlayContainer.remove();
-
     });
 
     // Add the overlay content to the overlay container
@@ -143,5 +141,7 @@ function displayWelcomeOverlay() {
     overlayContainer.appendChild(overlayContent);
 }
 
-// Call the function to display the welcome overlay
-displayWelcomeOverlay();
+// Listen for the custom event
+document.addEventListener('iconURL', (event) => {
+    displayWelcomeOverlay(event.detail);
+});

@@ -98,7 +98,7 @@ function loadDisqusScript() {
             if (chrome.runtime.lastError) {
                 console.error("Error retrieving user preferences:", chrome.runtime.lastError);
             } else {
-                const userPreferences = result.userPreferences || { language: 'en', sort: 'newest' }; // Set default values
+                const userPreferences = result.userPreferences || { language: 'en', sort: 'best' }; // Set default values
                 const disqusLoaderScript = document.querySelector('script[src*="disqusLoader.js"]');
                 disqusLoaderScript.dataset.userPreferences = JSON.stringify(userPreferences);
             }
@@ -166,10 +166,29 @@ function observeDOMChanges() {
 function loadWelcomeOverlay() {
     console.log("Loading welcome overlay script.");
 
+    // Create a new script element for the welcome overlay script
     const welcomeOverlayScript = document.createElement('script');
+    // Set the source of the script to the welcomeOverlay.js file, using chrome.runtime.getURL to get the correct path
     welcomeOverlayScript.src = chrome.runtime.getURL('welcomeOverlay.js');
+    // Append the script to the document
     document.head.appendChild(welcomeOverlayScript);
+
+    // Define an onload event handler for the welcome overlay script
+    welcomeOverlayScript.onload = () => {
+        // Get the URL of the icon48.png image using chrome.runtime.getURL
+        const iconURL = chrome.runtime.getURL('images/icon48.png');
+        // Create a new CustomEvent named 'iconURL' and set its detail property to the iconURL
+        const event = new CustomEvent('iconURL', { detail: iconURL });
+        // Dispatch the event to the document, which will trigger the welcome overlay script to display the overlay
+        document.dispatchEvent(event);
+    }
+
+    // Define an onerror event handler for the welcome overlay script.
+    welcomeOverlayScript.onerror = () => {
+        console.error("Failed to load welcome overlay script.");
+    };
 }
+
 
 // Initialization function to set up the Disqus comments and DOM observer
 function initialize() {
