@@ -40,10 +40,19 @@ function handleDisqusError() {
     }
 }
 
+// Listen for the embedUrl event
+document.addEventListener('embedUrl', (event) => {
+    const embedUrl = event.detail;
+    console.log("Received embedUrl:", embedUrl);
+
+    // Call the loadDisqus function with the embedUrl
+    loadDisqus(embedUrl);
+});
+
 // Function to dynamically load the Disqus embed script
-function loadDisqus() {
+function loadDisqus(embedUrl) {
     var d = document, s = d.createElement('script');
-    s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+    s.src = embedUrl;
     s.setAttribute('data-timestamp', +new Date());
 
     // Error handling
@@ -59,6 +68,3 @@ function loadDisqus() {
         loadingSpinner.innerHTML += '<p>Loading comments...</p>';
     }
 }
-
-// Load Disqus
-loadDisqus();

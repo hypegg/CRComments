@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "CRComments",
-    "version": "1.0.0.4",
+    "version": "1.0.0.5",
     "description": "Adds Disqus comments below the video player on Crunchyroll.",
     "author": "Hypergg",
     "permissions": [
@@ -45,7 +45,8 @@
                 "disqusLoader.js",
                 "welcomeOverlay.js",
                 "images/spinner.png",
-                "images/icon48.png"
+                "images/icon48.png",
+                "libs/embed.js"
             ],
             "matches": [
                 "*://www.crunchyroll.com/*"

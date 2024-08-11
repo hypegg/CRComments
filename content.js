@@ -84,6 +84,14 @@ function loadDisqusScript() {
             console.log("Disqus loader script loaded successfully.");
             // Hide the loading spinner once the script is loaded
             document.getElementById('loadingSpinner').style.display = 'none';
+
+            // Get the URL of the embed.js file using chrome.runtime.getURL
+            const embedUrl = chrome.runtime.getURL('libs/embed.js');
+
+            // Create a new CustomEvent named 'embedUrl' and set its detail property to the embedUrl
+            const event = new CustomEvent('embedUrl', { detail: embedUrl });
+            // Dispatch the event to the document, which will trigger the disqusLoader.js script to use the embedUrl
+            document.dispatchEvent(event);
         };
         script.onerror = () => {
             console.error("Failed to load Disqus loader script.");
